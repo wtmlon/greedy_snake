@@ -9,6 +9,7 @@ struct food
     int y;
     int request;
 }food;
+
 struct snake
 {
     int x[M];
@@ -17,6 +18,7 @@ struct snake
     int life;
     int go;
 }snake;
+
 int SC=0,key;
 void Paint(void);
 void Score(void);
@@ -72,7 +74,7 @@ void gameplay(void)
                     food.y++;
                 for(i=0;i<snake.festival-1;i++)
                 {
-                    if(snake.x[i]==food.x&&snake.y[i]==food.y){snake.x[i]+=20;}
+                    if(snake.x[i]==food.x&&snake.y[i]==food.y)snake.x[i]+=20;
                 }
                 food.request=0;
             }
@@ -90,17 +92,26 @@ void gameplay(void)
                     setfillcolor(WHITE);
                     snake.x[j]=snake.x[j-1];
                     snake.y[j]=snake.y[j-1];
-                    if(snake.go==1){snake.x[j-1]+=20;}
-                    if(snake.go==3){snake.x[j-1]-=20;}
-                    if(snake.go==2){snake.y[j-1]+=20;}
-                    if(snake.go==4){snake.y[j-1]-=20;}
+                    if(snake.go==1)snake.x[j-1]+=20;
+                    if(snake.go==3)snake.x[j-1]-=20;
+                    if(snake.go==2)snake.y[j-1]+=20;
+                    if(snake.go==4)snake.y[j-1]-=20;
                 }
             }
-            else{snake.x[299]=120;snake.y[299]=60;}
+            else
+            {
+                snake.x[299]=120;snake.y[299]=60;
+            }
+
             for(i=3;i<=snake.festival-1;i++)
             {
-                if(snake.x[0]==snake.x[i]&&snake.y[0]==snake.y[i]){snake.life=1;return;}
+                if(snake.x[0]==snake.x[i]&&snake.y[0]==snake.y[i])
+                {
+                    snake.life=1;
+                    return;
+                }
             }
+
             setfillcolor(BLACK);
             bar(snake.x[299],snake.y[299],snake.x[299]-20,snake.y[299]-20);
             for(i=0;i<snake.festival;i++)
@@ -109,7 +120,12 @@ void gameplay(void)
                 bar(snake.x[i],snake.y[i],snake.x[i]-20,snake.y[i]-20);
             }
             Sleep(50);
-            if(snake.x[0]>580||snake.y[0]>680||snake.x[0]-20<100||snake.y[0]-20<20){snake.life=1;break;}
+            if(snake.x[0]>580||snake.y[0]>680||snake.x[0]-20<100||snake.y[0]-20<20)
+            {
+                snake.life=1;
+                break;
+            }
+
             if(snake.x[0]==food.x&&snake.y[0]==food.y)
             {
                 setfillcolor(WHITE);
@@ -125,12 +141,18 @@ void gameplay(void)
             }
             a+=1;
         }
-        if(snake.life==1){break;}
+
+        if(snake.life==1)break;
         key=getch();
-        if(key==119&&snake.go!=2){snake.go=4;}else
-            if(key==115&&snake.go!=4){snake.go=2;}else
-                if(key==97&&snake.go!=1){snake.go=3;}else
-                    if(key==100&&snake.go!=3){snake.go=1;}
+        if(key==119&&snake.go!=2)
+            snake.go=4;
+        else if(key==115&&snake.go!=4)
+            snake.go=2;
+        else if(key==97&&snake.go!=1)
+            snake.go=3;
+        else if(key==100&&snake.go!=3)
+            snake.go=1;
+
     }
 }
 void gameover()
